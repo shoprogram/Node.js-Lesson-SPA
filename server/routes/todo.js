@@ -7,6 +7,11 @@ router.use('/test', (req, res, next) => {
 });
 
 router.get('/', async (req, res) => {
+
+  if (!req.user) {
+    return res.status(200).send([]);
+  }
+
   const todoList = await Todo.getTodoList(req.user.id);
   return res.status(200).send(todoList);
 });

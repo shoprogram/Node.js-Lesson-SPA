@@ -58,11 +58,13 @@ export default new Vuex.Store({
       commit('updateIsAuthenticated', false);
     },
     async checkAuthenticated({ commit }) {
-      const { user } = await axios
+      const res = await axios
         .get(`${BASE_URL}/user`)
-        .then((res) => res.data);
-      if (user) {
-        commit('updateLoginUser', user);
+        .then((resp) => resp)
+        .catch((err) => err.response);
+
+      if (res.status === 200) {
+        commit('updateLoginUser', res.data.user);
         commit('updateIsAuthenticated', true);
       } else {
         commit('resetLoginUser');
