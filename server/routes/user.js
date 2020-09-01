@@ -4,6 +4,10 @@ const { User } = require('../database/models');
 
 
 router.get('/', (req, res, next) => {
+  if (!req.user) {
+    return res.status(401).send({ user: null });
+  }
+
   const user = {
     userId: req.user.id,
     userName: req.user.username,
@@ -12,9 +16,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/all', async (req, res, next) => {
-  const userList = await
-
-  User.getAllUser();
+  const userList = await User.getAllUser();
   return res.status(200).send(userList);
 });
 
