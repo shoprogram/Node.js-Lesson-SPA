@@ -14,6 +14,10 @@ export default new Vuex.Store({
     },
     isAuthenticated: false,
     todoList: [],
+    targetTodo: {
+      title: '',
+      content: '',
+    },
   },
   getters: {
     loginUser: (state) => state.loginUser,
@@ -35,6 +39,9 @@ export default new Vuex.Store({
     },
     updateTodoList(state, todoList) {
       state.todoList = todoList;
+    },
+    editedTitle(state, payload) {
+      state.targetTodo = Object.assign({}, { ...state.targetArticle }, {title: payload.title,});
     },
   },
   actions: {
@@ -81,5 +88,14 @@ export default new Vuex.Store({
       await axios.put(`${BASE_URL}/todo/${todo.id}`, todo);
       dispatch('updateTodoList');
     },
+    editTitle({ commit }, title) {
+      commit({
+        type: 'editedTitle',
+        title,
+      });
+    },
+    // async addTodo({ dispatch }, todo) {
+    //   await 
+    // },
   },
 });

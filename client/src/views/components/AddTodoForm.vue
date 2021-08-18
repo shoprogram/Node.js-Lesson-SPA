@@ -6,20 +6,58 @@
         type="text"
         name="title"
         autocomplete="off"
-        placeholder="Todoのタイトルを入力してね。">
+        placeholder="Todoのタイトルを入力してね。"
+        :updateTitle="updateTitle"
+      >
     </div>
     <div class="register-input">
       <p class="register-input-title">内容</p>
       <textarea
         name="content"
         rows="3"
-        placeholder="Todoの内容を入力してね。"></textarea>
+        placeholder="Todoの内容を入力してね。"
+        :updateContent="updateContent"
+      ></textarea>
     </div>
     <div class="register-submit">
-      <button class="register-submit-button">追加する</button>
+      <button
+        class="register-submit-button"
+        @click="addTodo"
+      >
+        追加する
+      </button>
     </div>
   </form>
 </template>
+
+<script>
+import { mapActions } from 'vuex';
+
+export default {
+  // data() {
+  //   return {
+  //     targetTodo: {
+  //       title: '',
+  //       content: '',
+  //     },
+  //   };
+  // },
+  methods: {
+    ...mapActions([
+      'addTodo',
+      'editTitle',
+      'editContent',
+    ]),
+    updateTitle($event) {
+      this.editTitle($event.target.value);
+    },
+    updateContent($event) {
+      this.editContent($event.target.value);
+    },
+  },
+};
+</script>
+
 
 <style lang="scss" scoped>
 .register {
