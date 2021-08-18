@@ -23,6 +23,8 @@ export default new Vuex.Store({
     loginUser: (state) => state.loginUser,
     isAuthenticated: (state) => state.isAuthenticated,
     todoList: (state) => state.todoList,
+    getTitle: (state) => state.targetTodo.title,
+    getContent: (state) => state.targetTodo.content,
   },
   mutations: {
     updateLoginUser(state, user) {
@@ -42,6 +44,7 @@ export default new Vuex.Store({
     },
     editedTitle(state, payload) {
       state.targetTodo = Object.assign({}, { ...state.targetArticle }, {title: payload.title,});
+      console.log(state.targetTodo);
     },
   },
   actions: {
@@ -95,7 +98,7 @@ export default new Vuex.Store({
       });
     },
     // async addTodo({ dispatch }, todo) {
-    //   await 
+    //   await
     // },
   },
 });

@@ -7,7 +7,8 @@
         name="title"
         autocomplete="off"
         placeholder="Todoのタイトルを入力してね。"
-        :updateTitle="updateTitle"
+        :value="updateTitle"
+        @updateValue="emit(targetTitle, $event)"
       >
     </div>
     <div class="register-input">
@@ -16,13 +17,15 @@
         name="content"
         rows="3"
         placeholder="Todoの内容を入力してね。"
-        :updateContent="updateContent"
-      ></textarea>
+        :value="updateContent"
+        @updateValue="emit(targetContent, $event)"
+      >
+      </textarea>
     </div>
     <div class="register-submit">
       <button
         class="register-submit-button"
-        @click="addTodo"
+        @click="emit('addTodo')"
       >
         追加する
       </button>
@@ -31,9 +34,17 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 export default {
+  props: {
+    updateTitle: {
+      type: String,
+      default: '',
+    },
+    updateContent: {
+      type: String,
+      default: '',
+    },
+  },
   // data() {
   //   return {
   //     targetTodo: {
@@ -43,17 +54,6 @@ export default {
   //   };
   // },
   methods: {
-    ...mapActions([
-      'addTodo',
-      'editTitle',
-      'editContent',
-    ]),
-    updateTitle($event) {
-      this.editTitle($event.target.value);
-    },
-    updateContent($event) {
-      this.editContent($event.target.value);
-    },
   },
 };
 </script>

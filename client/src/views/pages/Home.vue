@@ -2,7 +2,13 @@
   <div>
     <my-navi />
     <template>
-      <my-add-todo-form />
+      <my-add-todo-form
+        :update-title="updateTitle"
+        :update-content="updateContent"
+        @target-title="targetTitle"
+        @target-content="targetContent"
+        @addTodo="addTodo"
+      />
     </template>
     <template>
       <div class="list-status">
@@ -37,8 +43,29 @@ export default {
     MyAddTodoForm,
     MyTodoDetail,
   },
+  data() {
+    return {
+      title: '',
+      content: '',
+    };
+  },
   created() {
     this.getTodoList();
+  },
+  computed: {
+    ...mapGetters([
+      'todoList',
+      'getTitle',
+      'getContent',
+    ]),
+    updateTitle() {
+      const { title } = this.getTitle;
+      return title;
+    },
+    updateContent() {
+      const { content } = this.getContent;
+      return content;
+    },
   },
   methods: {
     ...mapActions([
@@ -47,11 +74,17 @@ export default {
     ...mapActions({
       getTodoList: 'updateTodoList',
     }),
-  },
-  computed: {
-    ...mapGetters([
-      'todoList',
+    ...mapActions([
+      'addTodo',
+      'editTitle',
+      'editContent',
     ]),
+    targetTitle($event) {
+      this.editTitle($event.target.value);
+    },
+    targetContent($event) {
+      this.editContent($event.target.value);
+    },
   },
 };
 </script>
