@@ -23,8 +23,8 @@ export default new Vuex.Store({
     loginUser: (state) => state.loginUser,
     isAuthenticated: (state) => state.isAuthenticated,
     todoList: (state) => state.todoList,
-    getTitle: (state) => state.targetTodo.title,
-    getContent: (state) => state.targetTodo.content,
+    updateTitle: (state) => state.targetTodo.title,
+    updateContent: (state) => state.targetTodo.content,
   },
   mutations: {
     updateLoginUser(state, user) {
@@ -42,10 +42,17 @@ export default new Vuex.Store({
     updateTodoList(state, todoList) {
       state.todoList = todoList;
     },
-    editedTitle(state, payload) {
-      state.targetTodo = Object.assign({}, { ...state.targetArticle }, {title: payload.title,});
-      console.log(state.targetTodo);
-    },
+    // editedTodo(state, payload) {
+    //   state.targetTodo = Object.assign(
+    //     {},
+    //     { ...state.targetTodo },
+    //     {
+    //       title: payload.title,
+    //       contet: payload.content
+    //     }
+    //   );
+    //   console.log(state.targetTodo);
+    // },
   },
   actions: {
     async updateLoginUser({ commit }, param) {
@@ -97,8 +104,13 @@ export default new Vuex.Store({
         title,
       });
     },
-    // async addTodo({ dispatch }, todo) {
-    //   await
+    // async addTodo() {
+    //   await axios.post(`${BASE_URL}/todo`)
+    //     .then((res) => res.data);
+    //   // commit({
+    //   //   type: 'editedTodo',
+    //   //   title,
+    //   // });
     // },
   },
 });

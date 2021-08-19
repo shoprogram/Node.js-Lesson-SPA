@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  console.log(req.body);
   const param = {
     title: req.body.title,
     content: req.body.content,
@@ -25,6 +26,7 @@ router.post('/', async (req, res) => {
   };
 
   await Todo.addTodo(param);
+  res.redirect('http://localhost:8080/home');
   res.status(200).send();
 });
 

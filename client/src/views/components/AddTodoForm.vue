@@ -1,5 +1,9 @@
 <template>
-  <form class="register" @submit.prevent>
+  <form
+    class="register"
+    method="POST"
+    action="/api/todo"
+  >
     <div class="register-input">
       <p class="register-input-title">タイトル</p>
       <input
@@ -7,8 +11,6 @@
         name="title"
         autocomplete="off"
         placeholder="Todoのタイトルを入力してね。"
-        :value="updateTitle"
-        @updateValue="emit(targetTitle, $event)"
       >
     </div>
     <div class="register-input">
@@ -17,34 +19,38 @@
         name="content"
         rows="3"
         placeholder="Todoの内容を入力してね。"
-        :value="updateContent"
-        @updateValue="emit(targetContent, $event)"
       >
       </textarea>
     </div>
     <div class="register-submit">
-      <button
+      <!-- <button
         class="register-submit-button"
-        @click="emit('addTodo')"
+        type="submit"
+        @click="$emit('addTodo')"
       >
         追加する
-      </button>
+      </button> -->
+      <input
+        class="register-submit-button"
+        type="submit"
+        value="追加する"
+      >
     </div>
   </form>
 </template>
 
 <script>
 export default {
-  props: {
-    updateTitle: {
-      type: String,
-      default: '',
-    },
-    updateContent: {
-      type: String,
-      default: '',
-    },
-  },
+  // props: {
+  //   updateTitle: {
+  //     type: String,
+  //     default: '',
+  //   },
+  //   updateContent: {
+  //     type: String,
+  //     default: '',
+  //   },
+  // },
   // data() {
   //   return {
   //     targetTodo: {
