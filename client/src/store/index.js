@@ -25,6 +25,18 @@ export default new Vuex.Store({
     todoList: (state) => state.todoList,
     updateTitle: (state) => state.targetTodo.title,
     updateContent: (state) => state.targetTodo.content,
+    todosNum: (state) => { return state.todoList.length; },
+    completedNum: (state) => {
+      let completed = 0;
+      for (let i = 0; state.todoList.length > i; i++) {
+        if (state.todoList[i].isCompleted === 1) {
+          completed++;
+        } else {
+          continue;
+        }
+      }
+      return completed;
+    },
   },
   mutations: {
     updateLoginUser(state, user) {

@@ -3,15 +3,15 @@
     <my-navi />
     <template>
       <my-add-todo-form
-        :update-title="updateTitle"
-        :update-content="updateContent"
       />
+        <!-- :update-title="updateTitle"
+        :update-content="updateContent" -->
         <!-- @addTodo="addTodo" -->
     </template>
     <template>
       <div class="list-status">
-        <p>総件数: </p>
-        <p>完了済み: </p>
+        <p>総件数: {{ todosNum }}</p>
+        <p>完了済み: {{ completedNum }}</p>
       </div>
     </template>
     <template>
@@ -54,8 +54,10 @@ export default {
   computed: {
     ...mapGetters([
       'todoList',
-      'updateTitle',
-      'updateContent',
+      'todosNum',
+      'completedNum',
+      // 'updateTitle',
+      // 'updateContent',
     ]),
     // updateTitle() {
     //   const { title } = this.getTitle;
@@ -86,7 +88,6 @@ export default {
     //   this.editContent($event.target.value);
     // },
     deleteBtn(todo) {
-      console.log(todo, todo.id);
       this.deleteTodo(todo.id);
     },
   },
