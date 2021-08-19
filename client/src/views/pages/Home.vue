@@ -2,11 +2,7 @@
   <div>
     <my-navi />
     <template>
-      <my-add-todo-form
-        :update-title="updateTitle"
-        :update-content="updateContent"
-      />
-        <!-- @addTodo="addTodo" -->
+      <my-add-todo-form/>
     </template>
     <template>
       <div class="list-status">
@@ -22,7 +18,7 @@
           :todo="todo"
           @update-completed="updateTodo(todo)"
           @update-todo="updateTodo(todo)"
-          @deleteBtn="deleteBtn(todo)"
+          @deleteBtn="deleteTodo(todo.id)"
         />
       </ul>
     </template>
@@ -54,17 +50,7 @@ export default {
   computed: {
     ...mapGetters([
       'todoList',
-      'updateTitle',
-      'updateContent',
     ]),
-    // updateTitle() {
-    //   const { title } = this.getTitle;
-    //   return title;
-    // },
-    // updateContent() {
-    //   const { content } = this.getContent;
-    //   return content;
-    // },
   },
   methods: {
     ...mapActions([
@@ -74,21 +60,6 @@ export default {
     ...mapActions({
       getTodoList: 'updateTodoList',
     }),
-    // ...mapActions([
-    //   'addTodo',
-    //   // 'editTitle',
-    //   // 'editContent',
-    // ]),
-    // targetTitle($event) {
-    //   this.editTitle($event.target.value);
-    // },
-    // targetContent($event) {
-    //   this.editContent($event.target.value);
-    // },
-    deleteBtn(todo) {
-      console.log(todo, todo.id);
-      this.deleteTodo(todo.id);
-    },
   },
 };
 </script>

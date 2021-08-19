@@ -43,7 +43,6 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   await Todo.deleteTodo(req.params.id);
-  // res.redirect('/home');
   return res.status(200).send();
 });
 

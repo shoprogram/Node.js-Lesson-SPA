@@ -23,13 +23,6 @@
       </textarea>
     </div>
     <div class="register-submit">
-      <!-- <button
-        class="register-submit-button"
-        type="submit"
-        @click="$emit('addTodo')"
-      >
-        追加する
-      </button> -->
       <input
         class="register-submit-button"
         type="submit"
@@ -38,32 +31,6 @@
     </div>
   </form>
 </template>
-
-<script>
-export default {
-  // props: {
-  //   updateTitle: {
-  //     type: String,
-  //     default: '',
-  //   },
-  //   updateContent: {
-  //     type: String,
-  //     default: '',
-  //   },
-  // },
-  // data() {
-  //   return {
-  //     targetTodo: {
-  //       title: '',
-  //       content: '',
-  //     },
-  //   };
-  // },
-  methods: {
-  },
-};
-</script>
-
 
 <style lang="scss" scoped>
 .register {

@@ -42,17 +42,6 @@ export default new Vuex.Store({
     updateTodoList(state, todoList) {
       state.todoList = todoList;
     },
-    // editedTodo(state, payload) {
-    //   state.targetTodo = Object.assign(
-    //     {},
-    //     { ...state.targetTodo },
-    //     {
-    //       title: payload.title,
-    //       contet: payload.content
-    //     }
-    //   );
-    //   console.log(state.targetTodo);
-    // },
   },
   actions: {
     async updateLoginUser({ commit }, param) {
@@ -104,16 +93,7 @@ export default new Vuex.Store({
         title,
       });
     },
-    // async addTodo() {
-    //   await axios.post(`${BASE_URL}/todo`)
-    //     .then((res) => res.data);
-    //   // commit({
-    //   //   type: 'editedTodo',
-    //   //   title,
-    //   // });
-    // },
     async deleteTodo({ dispatch }, todoId) {
-      console.log('dnaiowngvogencal', todoId);
       await axios.delete(`${BASE_URL}/todo/${todoId}`, todoId)
         .then(() => {
           dispatch('updateTodoList');
