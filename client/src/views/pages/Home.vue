@@ -22,6 +22,7 @@
           :todo="todo"
           @update-completed="updateTodo(todo)"
           @update-todo="updateTodo(todo)"
+          @deleteBtn="deleteBtn(todo)"
         />
       </ul>
     </template>
@@ -68,6 +69,7 @@ export default {
   methods: {
     ...mapActions([
       'updateTodo',
+      'deleteTodo',
     ]),
     ...mapActions({
       getTodoList: 'updateTodoList',
@@ -83,6 +85,10 @@ export default {
     // targetContent($event) {
     //   this.editContent($event.target.value);
     // },
+    deleteBtn(todo) {
+      console.log(todo, todo.id);
+      this.deleteTodo(todo.id);
+    },
   },
 };
 </script>

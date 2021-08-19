@@ -40,6 +40,8 @@
         <button
           type="button"
           class="button button-delete"
+          value="削除"
+          @click="$emit('deleteBtn', todo)"
         >
           削除
         </button>

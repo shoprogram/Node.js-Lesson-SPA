@@ -112,5 +112,12 @@ export default new Vuex.Store({
     //   //   title,
     //   // });
     // },
+    async deleteTodo({ dispatch }, todoId) {
+      console.log('dnaiowngvogencal', todoId);
+      await axios.delete(`${BASE_URL}/todo/${todoId}`, todoId)
+        .then(() => {
+          dispatch('updateTodoList');
+        });
+    },
   },
 });
