@@ -1,22 +1,33 @@
 <template>
-  <form class="register" @submit.prevent>
+  <form
+    class="register"
+    method="POST"
+    action="/api/todo"
+  >
     <div class="register-input">
       <p class="register-input-title">タイトル</p>
       <input
         type="text"
         name="title"
         autocomplete="off"
-        placeholder="Todoのタイトルを入力してね。">
+        placeholder="Todoのタイトルを入力してね。"
+      >
     </div>
     <div class="register-input">
       <p class="register-input-title">内容</p>
       <textarea
         name="content"
         rows="3"
-        placeholder="Todoの内容を入力してね。"></textarea>
+        placeholder="Todoの内容を入力してね。"
+      >
+      </textarea>
     </div>
     <div class="register-submit">
-      <button class="register-submit-button">追加する</button>
+      <input
+        class="register-submit-button"
+        type="submit"
+        value="追加する"
+      >
     </div>
   </form>
 </template>

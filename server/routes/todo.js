@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
   };
 
   await Todo.addTodo(param);
+  res.redirect('/home');
   res.status(200).send();
 });
 

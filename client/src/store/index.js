@@ -14,11 +14,17 @@ export default new Vuex.Store({
     },
     isAuthenticated: false,
     todoList: [],
+    targetTodo: {
+      title: '',
+      content: '',
+    },
   },
   getters: {
     loginUser: (state) => state.loginUser,
     isAuthenticated: (state) => state.isAuthenticated,
     todoList: (state) => state.todoList,
+    updateTitle: (state) => state.targetTodo.title,
+    updateContent: (state) => state.targetTodo.content,
   },
   mutations: {
     updateLoginUser(state, user) {
@@ -80,6 +86,18 @@ export default new Vuex.Store({
     async updateTodo({ dispatch }, todo) {
       await axios.put(`${BASE_URL}/todo/${todo.id}`, todo);
       dispatch('updateTodoList');
+    },
+    editTitle({ commit }, title) {
+      commit({
+        type: 'editedTitle',
+        title,
+      });
+    },
+    async deleteTodo({ dispatch }, todoId) {
+      await axios.delete(`${BASE_URL}/todo/${todoId}`, todoId)
+        .then(() => {
+          dispatch('updateTodoList');
+        });
     },
   },
 });
