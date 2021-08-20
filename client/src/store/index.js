@@ -14,11 +14,29 @@ export default new Vuex.Store({
     },
     isAuthenticated: false,
     todoList: [],
+    targetTodo: {
+      title: '',
+      content: '',
+    },
   },
   getters: {
     loginUser: (state) => state.loginUser,
     isAuthenticated: (state) => state.isAuthenticated,
     todoList: (state) => state.todoList,
+    updateTitle: (state) => state.targetTodo.title,
+    updateContent: (state) => state.targetTodo.content,
+    todosNum: (state) => { return state.todoList.length; },
+    completedNum: (state) => {
+      let completed = 0;
+      for (let i = 0; state.todoList.length > i; i++) {
+        if (state.todoList[i].isCompleted === 1) {
+          completed++;
+        } else {
+          continue;
+        }
+      }
+      return completed;
+    },
   },
   mutations: {
     updateLoginUser(state, user) {
@@ -36,6 +54,17 @@ export default new Vuex.Store({
     updateTodoList(state, todoList) {
       state.todoList = todoList;
     },
+    // editedTodo(state, payload) {
+    //   state.targetTodo = Object.assign(
+    //     {},
+    //     { ...state.targetTodo },
+    //     {
+    //       title: payload.title,
+    //       contet: payload.content
+    //     }
+    //   );
+    //   console.log(state.targetTodo);
+    // },
   },
   actions: {
     async updateLoginUser({ commit }, param) {
@@ -80,6 +109,27 @@ export default new Vuex.Store({
     async updateTodo({ dispatch }, todo) {
       await axios.put(`${BASE_URL}/todo/${todo.id}`, todo);
       dispatch('updateTodoList');
+    },
+    editTitle({ commit }, title) {
+      commit({
+        type: 'editedTitle',
+        title,
+      });
+    },
+    // async addTodo() {
+    //   await axios.post(`${BASE_URL}/todo`)
+    //     .then((res) => res.data);
+    //   // commit({
+    //   //   type: 'editedTodo',
+    //   //   title,
+    //   // });
+    // },
+    async deleteTodo({ dispatch }, todoId) {
+      console.log('dnaiowngvogencal', todoId);
+      await axios.delete(`${BASE_URL}/todo/${todoId}`, todoId)
+        .then(() => {
+          dispatch('updateTodoList');
+        });
     },
   },
 });

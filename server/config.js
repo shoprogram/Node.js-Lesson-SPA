@@ -6,8 +6,8 @@ const api = require('./routes/api.js');
 require('dotenv').config();
 
 module.exports = app => {
-  app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
   app.use(cookieParser());
   app.use(session({
     secret: process.env.SECRET_KEY,
